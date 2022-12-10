@@ -1,0 +1,20 @@
+.Page {
+    display: flex;
+    flex-direction: column;
+}
+
+.PageControlGroup {
+    display: flex;
+    flex-direction: row;
+}
+
+.PageButton {
+    justify-content: space-around;
+    margin: 20px;
+    width: 30px
+}
+
+.Content {
+    margin: 10px;
+    min-width: 120px;
+}
