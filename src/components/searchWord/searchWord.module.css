@@ -1,0 +1,50 @@
+.HelpersContainer {
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(255, 255, 255);
+    /*padding: 5px;*/
+    border: solid rgb(200, 200, 200);
+    border-top: 0;
+    border-radius: 5px;
+    width: 497px;
+}
+
+.HelpersContainer ul {
+    padding-inline-start: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.SearchField {
+    width: 500px;
+}
+
+.Helper {
+    height: 25px;
+    padding: 3px 3px 3px 10px;
+}
+
+.Helper:hover {
+    background-color: #33bfff;
+}
+
+.Helper:active {
+    background-color: #00b0ff;
+}
+
+.Hebrew {
+    display: inline-block;
+    width: 120px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.WordClass {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.Translation {
+    display: inline-block;
+    width: 250px;
+}

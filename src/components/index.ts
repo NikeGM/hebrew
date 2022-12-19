@@ -1,3 +1,4 @@
 export * from './add/add';
-export * from './nounAddContent/nounAddContentx';
-export * from './select/select';
+export * from './addContent/addContentx';
+export * from './select';
+export * from './word/word';

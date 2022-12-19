@@ -1,0 +1,16 @@
+.Content {
+    display: flex;
+    flex-direction: column;
+    width: 190px;
+    margin-left: 30px;
+}
+
+.Row {
+    width: 190px;
+    margin: 15px;
+}
+
+.WordList {
+    display: flex;
+    flex-direction: row;
+}

@@ -4,25 +4,17 @@ import { WordClass } from '../../types';
 
 export interface ISelectClassProps {
   changeClass: (newClass: WordClass) => void;
+  defaultValue: WordClass
 }
 
-export function SelectClass({ changeClass }: ISelectClassProps) {
-   Object.keys(WordClass).map(key => console.log(key));
+export function SelectClass({ changeClass, defaultValue }: ISelectClassProps) {
 
-  const wordClassRows = [
-    {
-      name: 'Noun',
-      value: WordClass.NOUN
-    },
-    {
-      name: 'Adjective',
-      value: WordClass.ADJECTIVE
-    },
-    {
-      name: 'Verb',
-      value: WordClass.VERB
-    }
-  ];
+  const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1);
+
+  const wordClassRows = (Object.values(WordClass) as WordClass[]).map(value => ({
+    name: capitalize(value),
+    value
+  }));
 
   const changeClassHandler = (newValue: WordClass) => {
     changeClass(newValue);
@@ -30,7 +22,7 @@ export function SelectClass({ changeClass }: ISelectClassProps) {
 
   return <SelectLabels<WordClass>
     rows={wordClassRows}
-    defaultValue={WordClass.NOUN}
+    defaultValue={defaultValue}
     changeHandler={changeClassHandler}
     label="Class"
   />;

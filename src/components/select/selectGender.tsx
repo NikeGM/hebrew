@@ -2,7 +2,12 @@ import React from 'react';
 import SelectLabels from '../select/select';
 import { WordGender } from '../../types';
 
-export function SelectGender() {
+export interface ISelectGenderProps {
+  defaultValue?: WordGender;
+  changeHandler: (newValue: WordGender) => void;
+}
+
+export function SelectGender({ defaultValue, changeHandler }: ISelectGenderProps) {
   const wordGenderRows = [
     {
       name: 'Male',
@@ -13,14 +18,10 @@ export function SelectGender() {
       value: WordGender.FEMALE
     }
   ];
-
-  const changeClassHandler = (newValue: WordGender) => {
-  };
-
   return <SelectLabels<WordGender>
     rows={wordGenderRows}
-    defaultValue={WordGender.MALE}
-    changeHandler={changeClassHandler}
+    defaultValue={defaultValue || WordGender.MALE}
+    changeHandler={changeHandler}
     label="Gender"
   />;
 }

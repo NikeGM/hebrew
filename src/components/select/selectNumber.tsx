@@ -1,8 +1,14 @@
 import React from 'react';
 import SelectLabels from '../select/select';
-import { WordGender, WordNumber } from '../../types';
+import { WordNumber } from '../../types';
 
-export function SelectNumber() {
+export interface ISelectNumberProps {
+  defaultValue?: WordNumber;
+  changeHandler: (newValue: WordNumber) => void;
+}
+
+
+export function SelectNumber({ defaultValue, changeHandler }: ISelectNumberProps) {
   const wordNumberRows = [
     {
       name: 'Single',
@@ -14,13 +20,10 @@ export function SelectNumber() {
     }
   ];
 
-  const changeClassHandler = (newValue: WordNumber) => {
-  };
-
   return <SelectLabels<WordNumber>
     rows={wordNumberRows}
-    defaultValue={WordNumber.SINGLE}
-    changeHandler={changeClassHandler}
+    defaultValue={defaultValue || WordNumber.SINGLE}
+    changeHandler={changeHandler}
     label="Number"
   />;
 }

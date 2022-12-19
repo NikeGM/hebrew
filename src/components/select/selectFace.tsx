@@ -1,8 +1,14 @@
 import React from 'react';
-import SelectLabels from '../select/select';
 import { WordFace } from '../../types';
+import SelectLabels from './select';
 
-export function SelectFace() {
+export interface ISelectFaceProps {
+  defaultValue?: WordFace;
+  changeHandler: (newValue: WordFace) => void;
+}
+
+
+export function SelectFace({ defaultValue, changeHandler }: ISelectFaceProps) {
   const wordFaceRows = [
     {
       name: 'First',
@@ -18,13 +24,10 @@ export function SelectFace() {
     }
   ];
 
-  const changeClassHandler = (newValue: WordFace) => {
-  };
-
   return <SelectLabels<WordFace>
     rows={wordFaceRows}
-    defaultValue={WordFace.FIRST}
-    changeHandler={changeClassHandler}
+    defaultValue={defaultValue || WordFace.FIRST}
+    changeHandler={changeHandler}
     label="Face"
   />;
 }

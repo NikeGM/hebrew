@@ -50,26 +50,29 @@ export interface WordStats {
 export interface Word {
   wordId?: number;
   word: string;
-  translate: string;
+  translation: string;
   pronunciation: string;
   class: WordClass;
   comment: string;
   formIndex: number;
-  number: WordNumber;
-  gender: WordGender;
   root: string;
+  number?: WordNumber;
+  gender?: WordGender;
+  face?: WordFace;
+  tense?: WordTense;
   stats?: WordStats;
+  isInfinitive?: boolean;
+  isPairing?: boolean;
 }
 
-export interface Noun extends Word {
-  class: WordClass.NOUN;
+export enum Language {
+  RUSSIAN,
+  HEBREW
 }
 
-export interface Verb extends Word {
-  class: WordClass.VERB;
-  tense: WordTense;
-}
-
-export interface Adjective extends Word {
-  class: WordClass.ADJECTIVE;
+export interface EditWordsFilters {
+  like: string;
+  language: Language;
+  limit: number;
+  formIndexes: number[];
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import styles from './edit.module.css';
 import { Add } from '../../components';
+import { EditComponent } from '../../components/edit/edit';
 
 export enum EditPages {
   add,
@@ -21,9 +22,8 @@ export function Edit() {
       </div>
     </div>
     <div className={styles.Content}>
-      {
-        page === EditPages.add ? <Add/> : null
-      }
+      {page === EditPages.add ? <Add/> : null}
+      {page === EditPages.edit ? <EditComponent/> : null}
     </div>
   </div>;
 }
