@@ -67,12 +67,12 @@ export class Api {
       class: word.class,
       comment: word.comment,
       formIndex: word.formIndex,
-      number: fieldExist(Field.numeral, word.class, isInfinitive) ? WordNumber.SINGLE : null,
-      gender: fieldExist(Field.gender, word.class, isInfinitive) ? WordGender.MALE : null,
-      binyan: fieldExist(Field.binyan, word.class, isInfinitive) ? WordBinyan.PAAL : null,
-      group: fieldExist(Field.group, word.class, isInfinitive) ? WordGroup.PAAL_SIMPLE : null,
+      number: fieldExist(Field.numeral, word.class, isInfinitive) ? word.number : null,
+      gender: fieldExist(Field.gender, word.class, isInfinitive) ? word.gender : null,
+      binyan: fieldExist(Field.binyan, word.class, isInfinitive) ? word.binyan : null,
+      group: fieldExist(Field.group, word.class, isInfinitive) ? word.group : null,
       root: word.root,
-      tense: fieldExist(Field.tense, word.class, isInfinitive) ? WordTense.PRESENT : null,
+      tense: fieldExist(Field.tense, word.class, isInfinitive) ? word.tense : null,
       isPairing: word.class === WordClass.NOUN ? false : null,
       isInfinitive: word.class === WordClass.VERB ? isInfinitive : null
     });
