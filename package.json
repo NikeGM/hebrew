@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "REACT_APP_API_URL=http://localhost:9999/api react-scripts start",
-    "build": "react-scripts build"
+    "build": "REACT_APP_API_URL=http://localhost:9999/api react-scripts build"
   },
   "eslintConfig": {
     "extends": [
