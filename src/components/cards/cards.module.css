@@ -1,0 +1,69 @@
+.Container {
+}
+
+.InfoPanel {
+    display: flex;
+    width: 100px;
+    margin: 0 auto 20px;
+}
+
+.InfoBlock {
+    margin-left: 10px;
+}
+
+.Count {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.Errors {
+    font-size: 20px;
+    margin-left: 10px;
+    color: darkred;
+}
+
+.Success {
+    font-size: 20px;
+    margin-left: 10px;
+    color: green;
+}
+
+.DropPanel {
+    position: absolute;
+    width: 100vw;
+    /*z-index: -1;*/
+}
+
+.DropRowRight {
+    display: inline-block;
+    background-color: green;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    right: -10vw;
+}
+
+.DropRowLeft {
+    display: inline-block;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: -10vw;
+}
+
+.CardPanel {
+    margin-bottom: 20px;
+}
+
+.ButtonsPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.Button button {
+    width: 100px;
+}

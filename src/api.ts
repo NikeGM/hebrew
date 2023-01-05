@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { EditWordsFilters, Language, Word, WordClass, WordGender, WordNumber, WordTense } from './types';
+import { CardsFilters, EditWordsFilters, Language, Word, WordClass, WordGender, WordNumber, WordTense } from './types';
 import { Field, fieldExist } from './utils';
 
 export class Api {
-  // private url = process.env.REACT_APP_API_URL;
-  private url = 'http://192.168.1.16:9999/api';
+  private url = process.env.REACT_APP_API_URL;
+
+  // private url = 'http://192.168.1.16:9999/api';
 
   constructor() {
   }
@@ -28,12 +29,23 @@ export class Api {
     return result.data;
   }
 
+  public async getWordsForCards(filters: CardsFilters): Promise<Word[]> {
+    const result = await axios.post(`${api.url}/words/cards/search`, filters);
+    console.log(result.data)
+    return result.data;
+  }
+
   public async getWordWithForms(wordId: number): Promise<Word[]> {
     const result = await axios.post(`${api.url}/words/edit/get-word`, { wordId, withForms: true });
     return result.data;
   }
 
-  private convertWord = (word: Word) => {
+  public async saveStats(wordId: number, isCorrect: boolean) {
+    const result = await axios.post(`${api.url}/words/cards/save-stats`, { wordId, isCorrect });
+    return result.data;
+  }
+
+  private convertWord(word: Word) {
     const isInfinitive = word.class === WordClass.VERB && word.formIndex === 0;
 
     return ({
@@ -47,7 +59,7 @@ export class Api {
       number: fieldExist(Field.numeral, word.class, isInfinitive) ? WordNumber.SINGLE : null,
       gender: fieldExist(Field.gender, word.class, isInfinitive) ? WordGender.MALE : null,
       root: word.root,
-      tense: fieldExist(Field.tense, word.class, isInfinitive)? WordTense.PRESENT : null,
+      tense: fieldExist(Field.tense, word.class, isInfinitive) ? WordTense.PRESENT : null,
       isPairing: word.class === WordClass.NOUN ? false : null,
       isInfinitive: word.class === WordClass.VERB ? isInfinitive : null
     });

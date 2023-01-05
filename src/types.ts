@@ -1,3 +1,5 @@
+import { Mode } from './components/startScreen/startScreen';
+
 export enum WordClass {
   VERB = 'verb',
   NOUN = 'noun',
@@ -63,6 +65,7 @@ export interface Word {
   stats?: WordStats;
   isInfinitive?: boolean;
   isPairing?: boolean;
+  forms?: Word[]
 }
 
 export enum Language {
@@ -75,4 +78,10 @@ export interface EditWordsFilters {
   language: Language;
   limit: number;
   formIndexes: number[];
+}
+
+export interface CardsFilters {
+  count: number;
+  classes: WordClass[];
+  mode: Mode;
 }
