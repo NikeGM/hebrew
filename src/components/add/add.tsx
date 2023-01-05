@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './add.module.css';
 import { SelectClass } from '../select';
-import { Word, WordClass, WordGender, WordNumber, WordTense } from '../../types';
+import { Word, WordBinyan, WordClass, WordGender, WordGroup, WordNumber, WordTense } from '../../types';
 import AddContent from '../addContent/addContentx';
 import { Button } from '@mui/material';
 import { api } from '../../api';
@@ -20,6 +20,8 @@ export const getEmptyWord = (wordClass: WordClass, formIndex: number): Word => {
     formIndex,
     number: fieldExist(Field.numeral, wordClass, isInfinitive) ? WordNumber.SINGLE : undefined,
     gender: fieldExist(Field.gender, wordClass, isInfinitive) ? WordGender.MALE : undefined,
+    binyan: fieldExist(Field.binyan, wordClass, isInfinitive) ? WordBinyan.PAAL : undefined,
+    group: fieldExist(Field.group, wordClass, isInfinitive) ? WordGroup.PAAL_SIMPLE : undefined,
     root: '',
     tense: wordClass === WordClass.VERB ? WordTense.PRESENT : undefined,
     isPairing: wordClass === WordClass.NOUN ? false : undefined,

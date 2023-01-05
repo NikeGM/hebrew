@@ -6,7 +6,9 @@ export const enum Field {
   gender,
   tense,
   pairing,
-  infinitive
+  infinitive,
+  binyan,
+  group
 }
 
 const fields: Record<Field, WordClass[]> = {
@@ -15,14 +17,16 @@ const fields: Record<Field, WordClass[]> = {
   [Field.gender]: [WordClass.VERB, WordClass.NOUN, WordClass.ADJECTIVE, WordClass.PRONOUN, WordClass.NUMERALS, WordClass.PREPOSITION],
   [Field.tense]: [WordClass.VERB],
   [Field.pairing]: [WordClass.NOUN],
-  [Field.infinitive]: [WordClass.VERB]
+  [Field.infinitive]: [WordClass.VERB],
+  [Field.binyan]: [WordClass.VERB],
+  [Field.group]: [WordClass.VERB]
 };
 
 export const fieldExist = (field: Field, wordClass: WordClass, isInfinitive: boolean = false) => {
   switch (wordClass) {
     case WordClass.VERB:
       if (isInfinitive) {
-        return field === Field.infinitive;
+        return !![Field.infinitive, Field.group, Field.binyan].find(f => f === field);
       } else {
         return !!fields[field].find(c => c === wordClass);
       }

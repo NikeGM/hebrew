@@ -1,5 +1,5 @@
 import styles from './verb.module.css';
-import { Word } from '../../../types';
+import { Word, WordBinyan } from '../../../types';
 import { Mode } from '../../startScreen/startScreen';
 import classNames from 'classnames';
 
@@ -58,8 +58,17 @@ export default function Verb({ word, mode, sideNumber }: IVerbProps) {
     return content[mode][currentSide] || null;
   };
 
+
   return <div className={styles.Container}>
     <div className={styles.VerbColor}>VERB</div>
     {getSide()}
+    {currentSide === 0 ?
+      <div className={styles.BinyanPanel}>
+        <div className={styles.Binyan}>
+          {word.binyan}
+        </div>
+        <div className={styles.Group}>{word.group}</div>
+      </div>
+      : null}
   </div>;
 }

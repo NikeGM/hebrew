@@ -1,5 +1,15 @@
 import axios from 'axios';
-import { CardsFilters, EditWordsFilters, Language, Word, WordClass, WordGender, WordNumber, WordTense } from './types';
+import {
+  CardsFilters,
+  EditWordsFilters,
+  Language,
+  Word,
+  WordBinyan,
+  WordClass,
+  WordGender, WordGroup,
+  WordNumber,
+  WordTense
+} from './types';
 import { Field, fieldExist } from './utils';
 
 export class Api {
@@ -31,7 +41,7 @@ export class Api {
 
   public async getWordsForCards(filters: CardsFilters): Promise<Word[]> {
     const result = await axios.post(`${api.url}/words/cards/search`, filters);
-    console.log(result.data)
+    console.log(result.data);
     return result.data;
   }
 
@@ -58,6 +68,8 @@ export class Api {
       formIndex: word.formIndex,
       number: fieldExist(Field.numeral, word.class, isInfinitive) ? WordNumber.SINGLE : null,
       gender: fieldExist(Field.gender, word.class, isInfinitive) ? WordGender.MALE : null,
+      binyan: fieldExist(Field.binyan, word.class, isInfinitive) ? WordBinyan.PAAL : null,
+      group: fieldExist(Field.group, word.class, isInfinitive) ? WordGroup.PAAL_SIMPLE : null,
       root: word.root,
       tense: fieldExist(Field.tense, word.class, isInfinitive) ? WordTense.PRESENT : null,
       isPairing: word.class === WordClass.NOUN ? false : null,

@@ -6,6 +6,8 @@ import {
   WordClass
 } from '../../types';
 import { Field, fieldExist } from '../../utils';
+import { SelectBinyan } from '../select/selectBinyan';
+import { SelectGroup } from '../select/selectGroup';
 
 interface IAddContentProps {
   word: WordType;
@@ -15,7 +17,7 @@ interface IAddContentProps {
   wordIndex: number;
 }
 
-export default function Word({ word, updateWord, wordClass, wordIndex, wordsCount }: IAddContentProps) {
+export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddContentProps) {
   const change = (newValue: any, field: unknown) => {
     const newWord = { ...word };
     // @ts-ignore
@@ -99,6 +101,23 @@ export default function Word({ word, updateWord, wordClass, wordIndex, wordsCoun
         <SelectTense
           defaultValue={word.tense}
           changeHandler={value => change(value, 'tense')}
+        />
+      </div> : null
+    }
+    {fieldExist(Field.binyan, word.class, word.isInfinitive) ?
+      <div className={styles.Row}>
+        <SelectBinyan
+          defaultValue={word.binyan}
+          changeHandler={value => change(value, 'binyan')}
+        />
+      </div> : null
+    }
+    {fieldExist(Field.group, word.class, word.isInfinitive) ?
+      <div className={styles.Row}>
+        <SelectGroup
+          defaultValue={word.group}
+          binyan={word.binyan}
+          changeHandler={value => change(value, 'group')}
         />
       </div> : null
     }

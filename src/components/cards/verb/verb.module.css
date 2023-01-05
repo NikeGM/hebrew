@@ -33,5 +33,30 @@
 }
 
 .Text {
-   text-align: center;
+    text-align: center;
+}
+
+.BinyanPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.Binyan {
+    margin-left: 15px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: greenyellow;
+    background-color: mediumvioletred;
+}
+
+.Group {
+    margin-right: 15px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: greenyellow;
+    background-color: mediumvioletred;
 }

@@ -34,6 +34,24 @@ export enum WordTense {
   FUTURE = 'future'
 }
 
+export enum WordBinyan {
+  PAAL = 'paal',
+  PIEL = 'piel',
+  HIFIL = 'hifil',
+  HITPAEL = 'hitpael',
+}
+
+export enum WordGroup {
+  PAAL_SIMPLE = 'paal-simple',
+  PAAL_OT = 'paal-ot',
+  PAAL_2_LETTERS = 'paal-2-letters',
+  PIEL_EAE = 'piel-eae',
+  PIEL_EAOT = 'piel-eaot',
+  PIEL_4_LETTERS = 'piel-4-letters',
+  HIFIL_SIMPLE = 'hifil-simple',
+  HITPAEL_SIMPLE = 'hitpael-simple',
+}
+
 export enum WordStatus {
   LEARNED = 'learned',
   IN_PROGRESS = 'in_progress',
@@ -63,9 +81,11 @@ export interface Word {
   face?: WordFace;
   tense?: WordTense;
   stats?: WordStats;
+  binyan?: WordBinyan;
+  group?: WordGroup;
   isInfinitive?: boolean;
   isPairing?: boolean;
-  forms?: Word[]
+  forms?: Word[];
 }
 
 export enum Language {
