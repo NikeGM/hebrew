@@ -1,5 +1,5 @@
 import { Word as WordType } from '../../types';
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '../card/card';
 import styles from './cards.module.css';
 import { Button } from '@mui/material';
@@ -12,21 +12,39 @@ interface ICardsProps {
   words: WordType[];
   mode: Mode;
   setMainState: (state: MainState) => void;
+  setCorrect: (correct: number) => void;
+  setWrong: (wrong: number) => void;
+  setCurrentWordIndex: (index: number) => void;
+  currentWordIndex: number;
+  correct: number;
+  wrong: number;
 }
 
-export default function Cards({ words, mode, setMainState }: ICardsProps) {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [wrong, setWrong] = useState(0);
-  const [correct, setCorrect] = useState(0);
+export default function Cards({
+                                words,
+                                mode,
+                                setMainState,
+                                wrong,
+                                correct,
+                                currentWordIndex,
+                                setWrong,
+                                setCurrentWordIndex,
+                                setCorrect
+                              }: ICardsProps) {
+
+  const saveToStorage =
+    () => localStorage.setItem('state', JSON.stringify({ words, mode, currentWordIndex, correct, wrong }));
 
   const onNext = (word: WordType, isCorrect: boolean) => {
     isCorrect && setCorrect(correct + 1);
     !isCorrect && setWrong(wrong + 1);
-    !!word.wordId && api.saveStats(word.wordId, isCorrect).then(console.log);
-    if (currentWordIndex < words.length) {
+    !!word.wordId && api.saveStats(word.wordId, isCorrect, mode).then(console.log);
+    if (currentWordIndex < words.length - 1) {
       setCurrentWordIndex(currentWordIndex + 1);
+      saveToStorage();
     } else {
       setMainState(MainState.StartScreen);
+      localStorage.removeItem('state');
     }
   };
 
@@ -52,4 +70,4 @@ export default function Cards({ words, mode, setMainState }: ICardsProps) {
       </div>
     </div>
   </div>;
-}
+};

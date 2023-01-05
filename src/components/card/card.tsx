@@ -1,16 +1,20 @@
 import { Word as WordType, WordClass } from '../../types';
 import Verb from '../cards/verb/verb';
 import styles from './card.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Mode } from '../startScreen/startScreen';
 
 interface ICardsProps {
   word: WordType;
-  mode: Mode
+  mode: Mode;
 }
 
 export default function Card({ word, mode }: ICardsProps) {
   const [sideNumber, setSideNumber] = useState<number>(0);
+
+  useEffect(() => {
+    setSideNumber(0);
+  }, [word]);
 
   const clickHandler = () => {
     setSideNumber(sideNumber + 1);

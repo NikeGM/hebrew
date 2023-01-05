@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './main.module.css';
 import { Mode, StartScreen } from '../../components/startScreen/startScreen';
 import { Word } from '../../types';
@@ -13,7 +13,22 @@ export function Main() {
   const [mainState, setMainState] = useState<MainState>(MainState.StartScreen);
   const [mode, setMode] = useState<Mode>(Mode.WORD);
   const [words, setWords] = useState<Word[]>([]);
+  const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
+  const [wrong, setWrong] = useState<number>(0);
+  const [correct, setCorrect] = useState<number>(0);
 
+  useEffect(() => {
+    const save = localStorage.getItem('state');
+    if (save) {
+      const parsed = JSON.parse(save);
+      setWords(parsed.words);
+      setMode(parsed.mode);
+      setMainState(MainState.CardsScreen);
+      setWrong(parsed.wrong);
+      setCorrect(parsed.correct);
+      setCurrentWordIndex(parsed.currentWordIndex);
+    }
+  }, []);
 
   return <div>
     {mainState === MainState.StartScreen ? <StartScreen
@@ -22,7 +37,17 @@ export function Main() {
       setMode={setMode}
       mode={mode}
     /> : null}
-    {mainState === MainState.CardsScreen ? <Cards words={words} mode={mode} setMainState={setMainState}/> : null}
+    {mainState === MainState.CardsScreen ? <Cards
+      words={words}
+      mode={mode}
+      setMainState={setMainState}
+      setCorrect={setCorrect}
+      setWrong={setWrong}
+      setCurrentWordIndex={setCurrentWordIndex}
+      currentWordIndex={currentWordIndex}
+      wrong={wrong}
+      correct={correct}
+    /> : null}
   </div>;
 
 }

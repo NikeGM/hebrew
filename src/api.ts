@@ -11,6 +11,7 @@ import {
   WordTense
 } from './types';
 import { Field, fieldExist } from './utils';
+import { Mode } from './components/startScreen/startScreen';
 
 export class Api {
   private url = process.env.REACT_APP_API_URL;
@@ -50,8 +51,8 @@ export class Api {
     return result.data;
   }
 
-  public async saveStats(wordId: number, isCorrect: boolean) {
-    const result = await axios.post(`${api.url}/words/cards/save-stats`, { wordId, isCorrect });
+  public async saveStats(wordId: number, isCorrect: boolean, mode: Mode) {
+    const result = await axios.post(`${api.url}/words/cards/save-stats`, { wordId, isCorrect, mode });
     return result.data;
   }
 
