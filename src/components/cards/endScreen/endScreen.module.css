@@ -1,0 +1,24 @@
+.Container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.ButtonsPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+}
+
+.Button button {
+    width: 100px;
+}
+
+.Close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 5px;
+}
