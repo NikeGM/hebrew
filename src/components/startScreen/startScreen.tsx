@@ -76,6 +76,10 @@ export function StartScreen({ setWords, changeMainState, setMode, mode }: IStart
 
   const selectCountRows = [
     {
+      name: '5 words',
+      value: 5
+    },
+    {
       name: '20 words',
       value: 20
     },

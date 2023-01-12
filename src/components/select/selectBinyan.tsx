@@ -25,6 +25,10 @@ export function SelectBinyan({ defaultValue, changeHandler }: ISelectBinyanProps
     {
       name: 'Hitpael',
       value: WordBinyan.HITPAEL
+    },
+    {
+      name: 'Nifal',
+      value: WordBinyan.NIFAL
     }
   ];
 

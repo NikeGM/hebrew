@@ -47,6 +47,7 @@ export function Main() {
       currentWordIndex={currentWordIndex}
       wrong={wrong}
       correct={correct}
+      setWords={setWords}
     /> : null}
   </div>;
 

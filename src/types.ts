@@ -39,6 +39,7 @@ export enum WordBinyan {
   PIEL = 'piel',
   HIFIL = 'hifil',
   HITPAEL = 'hitpael',
+  NIFAL = 'NIFAL'
 }
 
 export enum WordGroup {
@@ -50,6 +51,7 @@ export enum WordGroup {
   PIEL_4_LETTERS = 'piel-4-letters',
   HIFIL_SIMPLE = 'hifil-simple',
   HITPAEL_SIMPLE = 'hitpael-simple',
+  NIFAL_SIMPLE = 'nifal-simple',
 }
 
 export enum WordStatus {
@@ -73,9 +75,9 @@ export interface Word {
   translation: string;
   pronunciation: string;
   class: WordClass;
-  comment: string;
+  comment?: string;
   formIndex: number;
-  root: string;
+  root?: string;
   number?: WordNumber;
   gender?: WordGender;
   face?: WordFace;

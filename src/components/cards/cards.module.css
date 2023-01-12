@@ -67,3 +67,10 @@
 .Button button {
     width: 100px;
 }
+
+.Close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 5px;
+}

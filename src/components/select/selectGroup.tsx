@@ -39,6 +39,10 @@ export function SelectGroup({ defaultValue, changeHandler, binyan }: ISelectGrou
     [WordBinyan.HITPAEL]: [{
       value: WordGroup.HITPAEL_SIMPLE,
       name: 'Simple'
+    }],
+    [WordBinyan.NIFAL]: [{
+      value: WordGroup.NIFAL_SIMPLE,
+      name: 'Simple'
     }]
   };
 
