@@ -4,11 +4,7 @@ import {
   EditWordsFilters,
   Language,
   Word,
-  WordBinyan,
   WordClass,
-  WordGender, WordGroup,
-  WordNumber,
-  WordTense
 } from './types';
 import { Field, fieldExist } from './utils';
 import { Mode } from './components/startScreen/startScreen';
@@ -22,6 +18,7 @@ export class Api {
   }
 
   public addWordWithForms(words: Word[]) {
+    console.log(words)
     return axios.post(`${api.url}/words/edit/save`, words.map(w => this.convertWord(w, words[0])));
   }
 
@@ -67,12 +64,12 @@ export class Api {
       class: word.class,
       comment: firstForm.comment,
       formIndex: word.formIndex,
-      number: fieldExist(Field.numeral, word.class, isInfinitive, word.formIndex) ? word.number : null,
-      gender: fieldExist(Field.gender, word.class, isInfinitive, word.formIndex) ? word.gender : null,
-      binyan: fieldExist(Field.binyan, word.class, isInfinitive, word.formIndex) ? firstForm.binyan : null,
-      group: fieldExist(Field.group, word.class, isInfinitive, word.formIndex) ? firstForm.group : null,
+      number: word.number || firstForm.number || null,
+      gender: word.gender || firstForm.gender || null,
+      binyan: word.binyan || firstForm.binyan || null,
+      group: word.group || firstForm.group || null,
       root: firstForm.root,
-      tense: fieldExist(Field.tense, word.class, isInfinitive) ? word.tense : null,
+      tense: word.tense || firstForm.tense || null,
       isPairing: word.class === WordClass.NOUN ? false : null,
       isInfinitive: word.class === WordClass.VERB ? isInfinitive : null
     });
