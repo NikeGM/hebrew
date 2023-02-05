@@ -16,6 +16,7 @@ export function Main() {
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
   const [wrong, setWrong] = useState<number>(0);
   const [correct, setCorrect] = useState<number>(0);
+  const [flags, setFlags] = useState<boolean[]>([]);
 
   useEffect(() => {
     const save = localStorage.getItem('state');
@@ -27,6 +28,7 @@ export function Main() {
       setWrong(parsed.wrong);
       setCorrect(parsed.correct);
       setCurrentWordIndex(parsed.currentWordIndex);
+      setFlags(parsed.flags);
     }
   }, []);
 
@@ -48,6 +50,8 @@ export function Main() {
       wrong={wrong}
       correct={correct}
       setWords={setWords}
+      flags={flags}
+      setFlags={setFlags}
     /> : null}
   </div>;
 

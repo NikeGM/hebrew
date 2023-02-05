@@ -4,7 +4,7 @@ import {
   EditWordsFilters,
   Language,
   Word,
-  WordClass,
+  WordClass
 } from './types';
 import { Field, fieldExist } from './utils';
 import { Mode } from './components/startScreen/startScreen';
@@ -18,8 +18,17 @@ export class Api {
   }
 
   public addWordWithForms(words: Word[]) {
-    console.log(words)
+    console.log(words);
     return axios.post(`${api.url}/words/edit/save`, words.map(w => this.convertWord(w, words[0])));
+  }
+
+  public saveForms(words: Word[], firstForm: Word) {
+    const lastIndex = Math.max(...(firstForm.forms || []).map(word => word.formIndex));
+    words.map((word, index) => this.convertWord({
+      ...word,
+      formIndex: index + lastIndex + 1
+    }, firstForm));
+    return axios.post(`${api.url}/words/edit/save-forms`, words.map(w => this.convertWord(w, firstForm)));
   }
 
   public updateWordWithForms(words: Word[]) {
@@ -64,9 +73,11 @@ export class Api {
       class: word.class,
       comment: firstForm.comment,
       formIndex: word.formIndex,
+      formId: firstForm.formId,
       number: word.number || firstForm.number || null,
       gender: word.gender || firstForm.gender || null,
       binyan: word.binyan || firstForm.binyan || null,
+      face: word.face || firstForm.face || null,
       group: word.group || firstForm.group || null,
       root: firstForm.root,
       tense: word.tense || firstForm.tense || null,

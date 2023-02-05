@@ -18,7 +18,6 @@ export function EditComponent() {
     } catch (e) {
       console.log(e);
     }
-
   };
 
   const updateWord = (newWord: Word, index: number) => {

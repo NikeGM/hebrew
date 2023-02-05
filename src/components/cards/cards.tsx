@@ -9,6 +9,7 @@ import { MainState } from '../../pages';
 import { api } from '../../api';
 import CloseIcon from '@mui/icons-material/Close';
 import EndScreen from './endScreen/endScreen';
+import { shuffle } from '../../utils';
 
 interface ICardsProps {
   words: WordType[];
@@ -18,9 +19,11 @@ interface ICardsProps {
   setWrong: (wrong: number) => void;
   setCurrentWordIndex: (index: number) => void;
   setWords: (words: Word[]) => void;
+  setFlags: (flags: boolean[]) => void;
   currentWordIndex: number;
   correct: number;
   wrong: number;
+  flags: boolean[];
 }
 
 export default function Cards({
@@ -33,12 +36,13 @@ export default function Cards({
                                 setWrong,
                                 setCurrentWordIndex,
                                 setCorrect,
-                                setWords
+                                setWords,
+                                setFlags,
+                                flags
                               }: ICardsProps) {
-  const [flags, setFlags] = useState<boolean[]>([]);
   console.log('Cards', wrong, correct, flags, words, currentWordIndex);
   const saveToStorage =
-    () => localStorage.setItem('state', JSON.stringify({ words, mode, currentWordIndex, correct, wrong }));
+    () => localStorage.setItem('state', JSON.stringify({ words, mode, currentWordIndex, correct, wrong, flags }));
 
   const onNext = (word: WordType, isCorrect: boolean) => {
     isCorrect && setCorrect(correct + 1);
@@ -62,7 +66,8 @@ export default function Cards({
     setMainState(MainState.StartScreen);
   };
   const onContinue = () => {
-    setWords(words.filter((word, index) => !flags[index]));
+    const erroredWords = words.filter((word, index) => !flags[index]);
+    setWords(shuffle(erroredWords));
     setInitState();
   };
 

@@ -1,10 +1,7 @@
 import { Checkbox, TextField } from '@mui/material';
 import styles from './word.module.css';
 import { SelectFace, SelectGender, SelectNumber, SelectTense } from '../select';
-import {
-  Word as WordType,
-  WordClass
-} from '../../types';
+import { Word as WordType, WordClass, WordTense } from '../../types';
 import { Field, fieldExist } from '../../utils';
 import { SelectBinyan } from '../select/selectBinyan';
 import { SelectGroup } from '../select/selectGroup';
@@ -24,6 +21,8 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
     newWord[field] = newValue;
     updateWord(newWord);
   };
+
+  const tense = word.tense || WordTense.PRESENT;
 
   return <div className={styles.Content} key={word.formIndex}>
     <div className={styles.Row}>
@@ -53,7 +52,7 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
         onChange={event => change(event.target.value, 'pronunciation')}
       />
     </div>
-    {fieldExist(Field.root, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.root, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <TextField
           id="root"
@@ -63,7 +62,7 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
           onChange={event => change(event.target.value, 'root')}
         />
       </div> : null}
-    {fieldExist(Field.comment, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.comment, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <TextField
           id="comment"
@@ -75,14 +74,14 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
           onChange={event => change(event.target.value, 'comment')}
         />
       </div> : null}
-    {fieldExist(Field.gender, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.gender, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <SelectGender
           defaultValue={word.gender}
           changeHandler={value => change(value, 'gender')}
         />
       </div> : null}
-    {fieldExist(Field.numeral, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.numeral, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <SelectNumber
           defaultValue={word.number}
@@ -90,7 +89,7 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
         />
       </div> : null
     }
-    {fieldExist(Field.face, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.face, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <SelectFace
           defaultValue={word.face}
@@ -98,7 +97,7 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
         />
       </div> : null
     }
-    {fieldExist(Field.tense, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.tense, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <SelectTense
           defaultValue={word.tense}
@@ -106,7 +105,7 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
         />
       </div> : null
     }
-    {fieldExist(Field.binyan, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.binyan, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <SelectBinyan
           defaultValue={word.binyan}
@@ -114,7 +113,7 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
         />
       </div> : null
     }
-    {fieldExist(Field.group, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.group, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <SelectGroup
           defaultValue={word.group}
@@ -123,7 +122,7 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
         />
       </div> : null
     }
-    {fieldExist(Field.infinitive, word.class, word.isInfinitive, word.formIndex) ?
+    {fieldExist(Field.infinitive, word.class, tense, word.isInfinitive, word.formIndex) ?
       <div className={styles.Row}>
         <Checkbox
           defaultChecked={word.isInfinitive}
@@ -131,7 +130,7 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
         /> Is infinitive
       </div> : null
     }
-    {fieldExist(Field.pairing, word.class, word.isInfinitive) ?
+    {fieldExist(Field.pairing, word.class, tense, word.isInfinitive) ?
       <div className={styles.Row}>
         <Checkbox
           defaultChecked={word.isPairing}

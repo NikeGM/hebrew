@@ -1,5 +1,5 @@
 import styles from './verb.module.css';
-import { Word, WordBinyan } from '../../../types';
+import { Word, WordBinyan, WordTense } from '../../../types';
 import { Mode } from '../../startScreen/startScreen';
 import classNames from 'classnames';
 
@@ -10,8 +10,6 @@ interface IVerbProps {
 }
 
 export default function Verb({ word, mode, sideNumber }: IVerbProps) {
-
-  console.log(word);
   const sideWord = <div className={styles.Content}>
     <div className={styles.Text}>{word.word}</div>
   </div>;
@@ -24,28 +22,42 @@ export default function Verb({ word, mode, sideNumber }: IVerbProps) {
     <div className={styles.Text}>{word.pronunciation}</div>
   </div>;
 
-  const forms = <div className={styles.Content}>
-    {word.forms?.map(form => <div
-      className={classNames(styles.HebrewWord, styles.Text)}
-      key={form.word + form.translation + form.pronunciation}
-    >{form.word}</div>)}
-  </div>;
+  const formsByTense = [word.forms?.filter(form => form.tense === WordTense.PRESENT),
+    word.forms?.filter(form => form.tense === WordTense.PAST),
+    word.forms?.filter(form => form.tense === WordTense.FUTURE),
+    word.forms?.filter(form => form.tense === WordTense.IMPERATIVE)
+  ];
 
-  const formsPronunciation = <div className={styles.Content}>
-    {word.forms?.map(form => <div
-      className={styles.Text}
-      key={form.word + form.translation + form.pronunciation}
-    >{form.pronunciation}</div>)}
-  </div>;
+  const content = {
+    [Mode.WORD]: [sideWord, sidePronunciation, sideTranslation],
+    [Mode.TRANSLATION]: [sideTranslation, sideWord, sidePronunciation]
+  };
+
+  formsByTense.map(forms => {
+    if (forms?.length) {
+      content[mode].push(
+        <div className={styles.Content}>
+          {forms?.map(form => <div
+            className={classNames(styles.HebrewWord, styles.Text)}
+            key={form.word + form.translation + form.pronunciation}
+          >{form.word}</div>)}
+        </div>
+      );
+      content[mode].push(
+        <div className={styles.Content}>
+          {word.forms?.map(form => <div
+            className={styles.Text}
+            key={form.word + form.translation + form.pronunciation}
+          >{form.pronunciation}</div>)}
+        </div>
+      );
+    }
+  });
 
   const comment = <div className={styles.Content}>
     <div className={styles.Text}>{word.comment}</div>
   </div>;
 
-  const content = {
-    [Mode.WORD]: [sideWord, sidePronunciation, sideTranslation, forms, formsPronunciation],
-    [Mode.TRANSLATION]: [sideTranslation, sideWord, sidePronunciation, forms, formsPronunciation]
-  };
 
   if (word.comment) {
     content[mode].push(comment);
@@ -66,6 +78,9 @@ export default function Verb({ word, mode, sideNumber }: IVerbProps) {
       <div className={styles.BinyanPanel}>
         <div className={styles.Binyan}>
           {word.binyan}
+        </div>
+        <div className={styles.Root}>
+          {word.root}
         </div>
         <div className={styles.Group}>{word.group}</div>
       </div>

@@ -31,7 +31,9 @@ export enum WordFace {
 export enum WordTense {
   PRESENT = 'present',
   PAST = 'past',
-  FUTURE = 'future'
+  FUTURE = 'future',
+  IMPERATIVE = 'imperative',
+
 }
 
 export enum WordBinyan {
@@ -39,7 +41,7 @@ export enum WordBinyan {
   PIEL = 'piel',
   HIFIL = 'hifil',
   HITPAEL = 'hitpael',
-  NIFAL = 'NIFAL'
+  NIFAL = 'nifal'
 }
 
 export enum WordGroup {
@@ -88,6 +90,7 @@ export interface Word {
   isInfinitive?: boolean;
   isPairing?: boolean;
   forms?: Word[];
+  formId?: number;
 }
 
 export enum Language {

@@ -21,6 +21,10 @@ export function SelectTense({ defaultValue, changeHandler }: ISelectTenseProps) 
     {
       name: 'Future',
       value: WordTense.FUTURE
+    },
+    {
+      name: 'Imperative',
+      value: WordTense.IMPERATIVE
     }
   ];
 
