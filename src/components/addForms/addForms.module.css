@@ -1,0 +1,15 @@
+.Add {
+    display: flex;
+    flex-direction: column;
+    width: 190px;
+}
+
+.AddRow {
+    margin: 0 15px 15px;
+    flex-direction: row;
+    display: flex;
+}
+
+.Element {
+    margin: 15px;
+}
