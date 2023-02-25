@@ -71,6 +71,11 @@ export interface WordStats {
   status: WordStatus;
 }
 
+export enum WordTags {
+  None = 'none',
+  EXCLUSION = 'exclusion'
+}
+
 export interface Word {
   wordId?: number;
   word: string;
@@ -91,6 +96,7 @@ export interface Word {
   isPairing?: boolean;
   forms?: Word[];
   formId?: number;
+  tags: (WordTags | WordClass | WordGroup | string)[];
 }
 
 export enum Language {

@@ -26,7 +26,8 @@ export const getEmptyWord = (wordClass: WordClass, formIndex: number): Word => {
     root: fieldExist(Field.comment, wordClass, WordTense.PRESENT, isInfinitive, formIndex) ? '' : undefined,
     tense: wordClass === WordClass.VERB ? WordTense.PRESENT : undefined,
     isPairing: wordClass === WordClass.NOUN ? false : undefined,
-    isInfinitive: wordClass === WordClass.VERB ? false : undefined
+    isInfinitive: wordClass === WordClass.VERB ? false : undefined,
+    tags: []
   });
 };
 const defaultClass = WordClass.VERB;

@@ -14,3 +14,9 @@
     display: flex;
     flex-direction: row;
 }
+
+.Tags {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}

@@ -1,10 +1,12 @@
-import { Checkbox, TextField } from '@mui/material';
+import { Button, Checkbox, TextField } from '@mui/material';
 import styles from './word.module.css';
 import { SelectFace, SelectGender, SelectNumber, SelectTense } from '../select';
-import { Word as WordType, WordClass, WordTense } from '../../types';
+import { Word as WordType, WordClass, WordTags, WordTense } from '../../types';
 import { Field, fieldExist } from '../../utils';
 import { SelectBinyan } from '../select/selectBinyan';
 import { SelectGroup } from '../select/selectGroup';
+import { SelectTags } from '../select/selectTags';
+import React, { useEffect } from 'react';
 
 interface IAddContentProps {
   word: WordType;
@@ -14,11 +16,20 @@ interface IAddContentProps {
   wordIndex: number;
 }
 
-export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddContentProps) {
+export default function Word({ word, updateWord, wordIndex, wordsCount, wordClass }: IAddContentProps) {
+  const deleteTag = (deletedTag: string) => {
+    const newWord = { ...word };
+    newWord.tags = word.tags.filter(tag => tag !== deletedTag);
+    updateWord(newWord);
+  };
   const change = (newValue: any, field: unknown) => {
     const newWord = { ...word };
-    // @ts-ignore
-    newWord[field] = newValue;
+    if (field !== 'tags') {
+      // @ts-ignore
+      newWord[field] = newValue;
+    } else {
+      newWord[field] = [...newWord[field], newValue];
+    }
     updateWord(newWord);
   };
 
@@ -137,6 +148,18 @@ export default function Word({ word, updateWord, wordIndex, wordsCount }: IAddCo
           onChange={event => change(event.target.checked, 'isPairing')}
         /> Is
         pairing
+      </div> : null
+    }
+    {fieldExist(Field.tags, word.class, tense, word.isInfinitive, word.formIndex) ?
+      <div className={styles.Row}>
+        <SelectTags
+          defaultValue={WordTags.None}
+          changeHandler={value => change(value, 'tags')}
+        />
+        <div className={styles.Tags}>{word.tags?.map(tag =>
+          <Button variant="contained" onClick={() => deleteTag(tag)}>{tag}</Button>
+        )}
+        </div>
       </div> : null
     }
   </div>;

@@ -62,6 +62,16 @@ export class Api {
     return result.data;
   }
 
+  private getTags(wordTags: string[], tags: string[]) {
+    const newTags = [...wordTags];
+    for (let tag of tags) {
+      if (!wordTags.find(t => tag === t)) {
+        newTags.push(tag);
+      }
+    }
+    return newTags;
+  }
+
   private convertWord(word: Word, firstForm: Word) {
     const isInfinitive = word.class === WordClass.VERB && word.formIndex === 0;
 
@@ -82,7 +92,12 @@ export class Api {
       root: firstForm.root,
       tense: word.tense || firstForm.tense || null,
       isPairing: word.class === WordClass.NOUN ? false : null,
-      isInfinitive: word.class === WordClass.VERB ? isInfinitive : null
+      isInfinitive: word.class === WordClass.VERB ? isInfinitive : null,
+      tags: word.formIndex === 0 ?
+        isInfinitive ?
+          this.getTags(word.tags,
+        [ word.binyan as string, word.group as string, 'infinitive', word.class]) :
+        this.getTags(word.tags, [word.class]) : []
     });
   };
 }

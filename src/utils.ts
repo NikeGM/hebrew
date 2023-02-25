@@ -10,7 +10,8 @@ export const enum Field {
   binyan,
   group,
   root,
-  comment
+  comment,
+  tags
 }
 
 const fields: Record<Field, WordClass[]> = {
@@ -23,7 +24,8 @@ const fields: Record<Field, WordClass[]> = {
   [Field.binyan]: [],
   [Field.group]: [],
   [Field.root]: [WordClass.NOUN, WordClass.ADJECTIVE, WordClass.PRONOUN, WordClass.NUMERALS, WordClass.PREPOSITION],
-  [Field.comment]: [WordClass.NOUN, WordClass.ADJECTIVE, WordClass.PRONOUN, WordClass.NUMERALS, WordClass.PREPOSITION]
+  [Field.comment]: [WordClass.NOUN, WordClass.ADJECTIVE, WordClass.PRONOUN, WordClass.NUMERALS, WordClass.PREPOSITION],
+  [Field.tags]: [],
 };
 
 export const fieldExist = (
@@ -35,7 +37,7 @@ export const fieldExist = (
   switch (wordClass) {
     case WordClass.VERB:
       if (isInfinitive || formIndex === 0) {
-        return !![Field.infinitive, Field.group, Field.binyan, Field.root, Field.comment].find(f => f === field);
+        return !![Field.infinitive, Field.group, Field.binyan, Field.root, Field.comment, Field.tags].find(f => f === field);
       } else {
         if ((tense === WordTense.PAST || tense === WordTense.FUTURE) && field === Field.face) {
           return true;
